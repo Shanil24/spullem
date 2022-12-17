@@ -5,14 +5,14 @@ function renderTodo(todo) {
 
   const list = document.querySelector('.js-todo-list');
   const item = document.querySelector(`[data-key='${todo.id}']`);
-  
+
   if (todo.deleted) {
     item.remove();
     if (todoItems.length === 0) list.innerHTML = '';
     return
   }
 
-  const isChecked = todo.checked ? 'done': '';
+  const isChecked = todo.checked ? 'done' : '';
   const node = document.createElement("li");
   node.setAttribute('class', `todo-item ${isChecked}`);
   node.setAttribute('data-key', todo.id);
@@ -49,15 +49,15 @@ function toggleDone(key) {
   renderTodo(todoItems[index]);
 }
 
-function deleteTodo(key) {
-  const index = todoItems.findIndex(item => item.id === Number(key));
-  const todo = {
-    deleted: true,
-    ...todoItems[index]
-  };
-  todoItems = todoItems.filter(item => item.id !== Number(key));
-  renderTodo(todo);
-}
+// function deleteTodo(key) {
+//   const index = todoItems.findIndex(item => item.id === Number(key));
+//   const todo = {
+//     deleted: true,
+//     ...todoItems[index]
+//   };
+//   todoItems = todoItems.filter(item => item.id !== Number(key));
+//   renderTodo(todo);
+// }
 
 const form = document.querySelector('.js-form');
 form.addEventListener('submit', event => {
@@ -78,7 +78,7 @@ list.addEventListener('click', event => {
     const itemKey = event.target.parentElement.dataset.key;
     toggleDone(itemKey);
   }
-  
+
   if (event.target.classList.contains('js-delete-todo')) {
     const itemKey = event.target.parentElement.dataset.key;
     deleteTodo(itemKey);
